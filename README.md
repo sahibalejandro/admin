@@ -48,15 +48,45 @@ password `admin`.
 
     php artisan migrate --package="sahibalejandro/admin"
 
-Create a routes group in your `app/routes.php` file, where to put all your
-admin sections:
+You can customize the navbar menu on the config file `admin.php`, here is
+an example:
+
+    return array(
+        // The entire menu
+        'menu' => array(
+            // A menu item
+            array(
+                'text' => 'Products', // Text to show
+                'url'  => 'products', // URL (will be automatically prefixed)
+            ),
+            // A menu item
+            array(
+                'text' => 'Magazines', // Text to show
+                'url'  => 'magazines', // URL
+
+                // A submenu for magazines
+                'submenu' => array(
+                    array(
+                        'text' => 'View magazines',
+                        'url'  => '',
+                    ),
+                    array(
+                        'text' => 'Add magazine',
+                        'url'  => 'add',
+                    ),
+                ),
+            ),
+        ),
+    );
+
+You can create your own routes using the filter `admin-auth`.
 
     Route::group(array('before' => 'admin-auth'), function ()
     {
         Route::get('admin', 'AdminController@home');
     });
 
-At this point you may wish create your own `AdminController` controller.
+Now just create your own admin controllers extending the `AdminBaseController` class.
 
 Customization
 =============
