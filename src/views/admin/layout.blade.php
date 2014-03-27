@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin panel</title>
+    <title>{{{ Config::get('admin::admin.name') }}}</title>
     {{ HTML::style('packages/sahibalejandro/admin/bootstrap/css/bootstrap.min.css') }}
 </head>
 <body>
@@ -30,5 +30,6 @@
     </div>
     
     {{ HTML::script('packages/sahibalejandro/admin/js/jquery.js') }}
+    {{ HTML::script('packages/sahibalejandro/admin/bootstrap/js/bootstrap.min.js') }}
 </body>
 </html>

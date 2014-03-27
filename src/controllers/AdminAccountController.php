@@ -1,5 +1,5 @@
 <?php
-class AdminAccountController extends Controller
+class AdminAccountController extends AdminBaseController
 {
     public function edit($id = 0)
     {
@@ -32,7 +32,7 @@ class AdminAccountController extends Controller
          * return to accounts list.
          */
         if ($Validator->fails()) {
-            return Redirect::route('admin.account.edit')
+            return Redirect::route('admin.account')
                    ->withInput()
                    ->withErrors($Validator);
         } else {
@@ -46,10 +46,10 @@ class AdminAccountController extends Controller
             }
 
             if ($Admin->save()) {
-                return Redirect::route('admin.account.edit')
+                return Redirect::route('admin.account')
                        ->with('success', 'Account data saved.');
             } else {
-                return Redirect::route('admin.account.edit')
+                return Redirect::route('admin.account')
                        ->withInput()
                        ->with('error', "Can't save data, try again.");
             }

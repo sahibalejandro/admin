@@ -6,7 +6,7 @@
 
 {{
 Form::model($Admin, array(
-    'route' => array('admin.account.save'),
+    'route' => array('admin.account'),
     'class' => 'form-horizontal'))
 }}
 

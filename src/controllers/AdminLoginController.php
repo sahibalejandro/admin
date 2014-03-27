@@ -1,5 +1,5 @@
 <?php
-class AdminLoginController extends Controller
+class AdminLoginController extends AdminBaseController
 {
     /**
      * Show sign in interface
@@ -31,7 +31,7 @@ class AdminLoginController extends Controller
         ), Input::has('remember'));
 
         if ($auth) {
-            return Redirect::intended('admin')
+            return Redirect::intended(Config::get('admin::admin.url'))
                    ->with('message', 'You are logged in.');
         } else {
             return Redirect::route('admin.login')
