@@ -1,6 +1,6 @@
 {
     "name": "sahibalejandro/admin",
-    "description": "A basic admin layout.",
+    "description": "A basic admin panel login interface.",
     "authors": [
         {
             "name": "Sahib J. Leo",
@@ -10,6 +10,7 @@
     "license": "MIT",
     "keywords": [
         "admin",
+        "login",
         "laravel"
     ],
     "require": {
