@@ -1,6 +1,6 @@
 {
     "name": "sahibalejandro/admin",
-    "description": "A basic admin panel login interface.",
+    "description": "A basic admin panel login interface for Laravel 4",
     "authors": [
         {
             "name": "Sahib J. Leo",
