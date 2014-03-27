@@ -31,6 +31,14 @@ After installing the new package add the Service Provider to the `providers` arr
     )
     ...
 
+To overwrite configuration options execute the next command:
+
+    php artisan config:publish sahibalejandro/admin
+
+When this command is executed, the configuration files for your application
+will be copied to `app/config/packages/sahibalejandro/admin` where they can
+be safely modified by you.
+
 Publish the assets to your project's `public` directory:
 
     php artisan asset:publish sahibalejandro/admin
