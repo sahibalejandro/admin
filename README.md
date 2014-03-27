@@ -31,14 +31,6 @@ After installing the new package add the Service Provider to the `providers` arr
     )
     ...
 
-To overwrite configuration options execute the next command:
-
-    php artisan config:publish sahibalejandro/admin
-
-When this command is executed, the configuration files for your application
-will be copied to `app/config/packages/sahibalejandro/admin` where they can
-be safely modified by you.
-
 Publish the assets to your project's `public` directory:
 
     php artisan asset:publish sahibalejandro/admin
@@ -47,6 +39,26 @@ Create the `users` table. By default there is a user named `admin` with the
 password `admin`.
 
     php artisan migrate --package="sahibalejandro/admin"
+
+You can create your own routes using the filter `admin-auth`.
+
+    Route::group(array('before' => 'admin-auth'), function ()
+    {
+        Route::get('admin', 'AdminController@home');
+    });
+
+Now just create your own admin controllers extending the `AdminBaseController` class.
+
+Customization
+=============
+
+To overwrite configuration options execute the next command:
+
+    php artisan config:publish sahibalejandro/admin
+
+When this command is executed, the configuration files for your application
+will be copied to `app/config/packages/sahibalejandro/admin` where they can
+be safely modified by you.
 
 You can customize the navbar menu on the config file `admin.php`, here is
 an example:
@@ -68,31 +80,19 @@ an example:
                 'submenu' => array(
                     array(
                         'text' => 'View magazines',
-                        'url'  => '',
+                        'url'  => '', // URL (will be automatically prefixed)
                     ),
                     array(
                         'text' => 'Add magazine',
-                        'url'  => 'add',
+                        'url'  => 'add', // URL (will be automatically prefixed)
                     ),
                 ),
             ),
         ),
     );
 
-You can create your own routes using the filter `admin-auth`.
-
-    Route::group(array('before' => 'admin-auth'), function ()
-    {
-        Route::get('admin', 'AdminController@home');
-    });
-
-Now just create your own admin controllers extending the `AdminBaseController` class.
-
-Customization
-=============
-
-In the most cases you will need to modify the package's views, you can easily
-export the package views to your own `app/views` directory using the command:
+If you need to customize package's default views first execute the next
+command:
 
     php artisan view:publish sahibalejandro/admin
 
@@ -100,6 +100,3 @@ This command will copy the package's views into the `app/views/packages`
 directory. Once the views have been published, you may tweak them to your
 liking! The exported views will automatically take precendence over the
 package's own view files.
-
-The Navbar menu is located in the view `admin/navbar.blade.php` and uses
-Twitter's Boorstrap layout.
