@@ -16,7 +16,7 @@ class AdminLoginController extends AdminBaseController
     {
         Auth::logout();
         return Redirect::route('admin.login')
-               ->with('message', 'You are logged out.');
+               ->with('message', trans('admin::login.logout'));
     }
 
     /**
@@ -32,10 +32,10 @@ class AdminLoginController extends AdminBaseController
 
         if ($auth) {
             return Redirect::intended(Config::get('admin::admin.url'))
-                   ->with('message', 'You are logged in.');
+                   ->with('message', trans('admin::login.login'));
         } else {
             return Redirect::route('admin.login')
-                   ->with('error', 'Incorrect access data, try again.')
+                   ->with('error', trans('admin::login.fail'))
                    ->withInput();
         }
     }
