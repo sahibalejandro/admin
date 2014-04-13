@@ -22,7 +22,7 @@ Add the package to your `composer.json` file and install it.
 
     ...
     "require": {
-        "sahibalejandro/admin": "1.*"
+        "sahibalejandro/admin": "2.*"
     }
     ...
 
