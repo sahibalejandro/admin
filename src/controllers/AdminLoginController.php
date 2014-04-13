@@ -14,7 +14,7 @@ class AdminLoginController extends AdminBaseController
      */
     public function logout()
     {
-        Auth::logout();
+        Auth::admin()->logout();
         return Redirect::route('admin.login')
                ->with('message', trans('admin::login.logout'));
     }
@@ -25,9 +25,10 @@ class AdminLoginController extends AdminBaseController
      */
     public function postLogin()
     {
-        $auth = Auth::attempt(array(
+        $auth = Auth::admin()->attempt(array(
             'username' => Input::get('username'),
-            'password' => Input::get('password')
+            'password' => Input::get('password'),
+            'active'   => 1,
         ), Input::has('remember'));
 
         if ($auth) {

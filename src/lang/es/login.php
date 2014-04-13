@@ -1,19 +1,19 @@
 <?php
 return array(
     /* -------------------------------------------------------------------------
-     * Interfaz de login
+     * Login interface
      */
     'welcome'     => 'Bienvenido a :admin_panel',
     'message'     => 'Por favor inicia sesión para utilizar :admin_panel',
-    'username'    => 'Usuario',
+    'username'    => 'Nombre de usuario',
     'password'    => 'Contraseña',
-    'stay_signed' => 'Permanecer conectado',
+    'stay_signed' => 'Recordarme',
     'signin'      => 'Iniciar sesión',
 
     /* -------------------------------------------------------------------------
-     * Mensajes
+     * Messages
      */
-    'fail'   => 'Usuario y/o contraseña incorrectos.',
+    'fail'   => 'Datos de acceso incorrectos o la cuenta está inactiva, intenta de nuevo.',
     'login'  => 'Has iniciado sesión.',
-    'logout' => 'Tu sesión ha terminado.',
+    'logout' => 'Tu sesión se ha cerrado.',
 );

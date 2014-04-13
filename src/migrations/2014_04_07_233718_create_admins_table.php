@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration {
+class CreateAdminsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,18 +12,21 @@ class CreateUsersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('users', function(Blueprint $table)
+		Schema::create('admins', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('username', 20);
+			$table->string('name', 50);
 			$table->string('password', 60);
+			$table->tinyInteger('active')->default(1);
+			$table->tinyInteger('super_admin')->default(0);
 			$table->timestamps();
 		});
 
 		// Insert default admin account.
 		DB::insert(
-			'insert into users(username,password,created_at,updated_at)values(?,?,NOW(),NOW())',
-			array('admin', Hash::make('admin'))
+			'insert into admins(username,name,password,super_admin,created_at,updated_at)values(?,?,?,1,NOW(),NOW())',
+			array('admin', 'Admin', Hash::make('admin'))
 		);
 	}
 
@@ -34,7 +37,7 @@ class CreateUsersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('users');
+		Schema::drop('admins');
 	}
 
 }

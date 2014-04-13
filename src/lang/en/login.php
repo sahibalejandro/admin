@@ -13,7 +13,7 @@ return array(
     /* -------------------------------------------------------------------------
      * Messages
      */
-    'fail'   => 'Incorrect access data, try again.',
+    'fail'   => 'Invalid data or the account has been deactivated, try again.',
     'login'  => 'You are logged in.',
     'logout' => 'You are logged out.',
 );

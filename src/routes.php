@@ -7,6 +7,11 @@ Route::group(array('prefix' => Config::get('admin::admin.url')), function ()
     /**
      * Public routes
      */
+    Route::get('/', array(
+        'as'   => 'admin',
+        'uses' => 'AdminController@home',
+    ));
+
     Route::get('login', array(
         'as'   => 'admin.login',
         'uses' => 'AdminLoginController@login',
@@ -26,25 +31,39 @@ Route::group(array('prefix' => Config::get('admin::admin.url')), function ()
      */
     Route::group(array('before' => 'admin-auth'), function ()
     {
-        /**
-         * Admin auth + CSRF filters
-         */
-        Route::group(array('before' => 'csrf'), function ()
-        {
-            // Save account data
-            Route::post('account', 'AdminAccountController@save');
-        });
-
         // Logout the user
         Route::get('logout', array(
             'as'   => 'admin.logout',
             'uses' => 'AdminLoginController@logout',
         ));
+    });
 
-        // Show form to edit admin account
-        Route::get('account', array(
-            'as'   => 'admin.account',
-            'uses' => 'AdminAccountController@edit',
+    /**
+     * Super admin auth filter
+     */
+    Route::group(array('before' => 'admin-auth|super-admin-auth'), function () {
+        /**
+         * Super admin auth + CSRF filters
+         */
+        Route::group(array('before' => 'csrf'), function ()
+        {
+            // Save account data
+            Route::post('accounts/save/{admin?}', array(
+                'as'   => 'admin.accounts.save',
+                'uses' => 'AdminAccountsController@save'
+            ));
+        });
+
+        // Show list of admin accounts
+        Route::get('accounts', array(
+            'as'   => 'admin.accounts',
+            'uses' => 'AdminAccountsController@index',
+        ));
+
+        // Show form to edit an admin account
+        Route::get('accounts/edit/{admin?}', array(
+            'as'   => 'admin.accounts.edit',
+            'uses' => 'AdminAccountsController@edit',
         ));
     });
 
