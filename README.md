@@ -26,24 +26,58 @@ Add the package to your `composer.json` file and install it.
     }
     ...
 
-After installing the new package add the Service Provider to the `providers`
-array in your `app/config/app.php` file:
+After installing the new package, add the new *Service Providers* and
+disable the default `AuthServiceProvider`.  
+To do this open your `app/config/app.php`
+file and edit the `providers` array like this:
 
     ...
     'providers' => array(
         ...
+
+        // Add the new service providers
         'Sahibalejandro\Admin\AdminServiceProvider',
+        'Ollieread\Multiauth\MultiauthServiceProvider',
+
+        // Disable default Laravel's Auth Service Provider
+        //'Illuminate\Auth\AuthServiceProvider',
+
+        ...
     )
     ...
 
+To properly configure **Ollie Read Multiauth** open `app/config/auth.php` with
+its default values:
 
-**At this point YOU NEED to do a few more easy steps to configure the package
-`ollieread/multiauth`, please follow this
-[link](https://github.com/ollieread/multiauth#installation) and come back when
-you're ready to continue.**
+    return array(
+        'driver' => 'eloquent',
+        'model' => 'User',
+        'table' => 'users',
+        ...
+    );
 
+Now remove the first three options and replace as follows:
 
-Publish the assets to your project's `public` directory:
+    return array(
+        'multi' => array(
+
+            'user' => array(
+    			      'driver' => 'eloquent',
+    			      'model'  => 'User',
+            ),
+
+            'admin' => array(
+    		 	     'driver' => 'eloquent',
+    			      'model'  => 'Admin',
+            ),
+        ),
+        ...
+    );
+
+*Read more about [**Ollie Read's Multiauth**](https://github.com/ollieread/multiauth) on his GitHub repository.*
+
+Now that we have service providers and multiauth configured, it's time to publish
+the assets to your project's `public` directory:
 
     php artisan asset:publish sahibalejandro/admin
 
