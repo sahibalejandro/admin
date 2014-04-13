@@ -9,12 +9,16 @@ Description
 A basic admin panel login interface, with this you can start building your own
 admin panel following the layout this package provides.
 
+**IMPORTANT: This package uses [ollieread/multiauth](https://github.com/ollieread/multiauth),
+but you don't need to add that requirement to your `composer.json` file.**
+
 This package was made for a personal project, but I think it may help you too.
 
 Installation
 ============
 
-Add the package to your `composer.json` file and install it.
+Add the package to your `composer.json` file and install it.  
+**NOTE: You don't need to add the `ollieread/multiauth` package.**
 
     ...
     "require": {
@@ -22,7 +26,8 @@ Add the package to your `composer.json` file and install it.
     }
     ...
 
-After installing the new package add the Service Provider to the `providers` array in your `app/config/app.php` file:
+After installing the new package add the Service Provider to the `providers`
+array in your `app/config/app.php` file:
 
     ...
     'providers' => array(
@@ -31,11 +36,18 @@ After installing the new package add the Service Provider to the `providers` arr
     )
     ...
 
+
+**At this point YOU NEED to do a few more easy steps to configure the package
+`ollieread/multiauth`, please follow this
+[link](https://github.com/ollieread/multiauth#installation) and come back when
+you're ready to continue.**
+
+
 Publish the assets to your project's `public` directory:
 
     php artisan asset:publish sahibalejandro/admin
 
-Create the `users` table. By default there is a user named `admin` with the
+Create the `admins` table. By default there is a user named `admin` with the
 password `admin`.
 
     php artisan migrate --package="sahibalejandro/admin"
@@ -47,7 +59,8 @@ You can create your own routes using the filter `admin-auth`.
         Route::get('admin', 'AdminController@home');
     });
 
-Now just create your own admin controllers extending the `AdminBaseController` class.
+Now just create your own admin controllers extending the `AdminBaseController`
+class.
 
 Customization
 =============
